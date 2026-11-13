@@ -493,6 +493,7 @@ p.buttons a.icon-checked:hover { background: var(--ig-accent-hover); color: var(
 .tabular p { padding-top: 3px; padding-bottom: 3px; }
 .tabular label { color: var(--ig-text-2); font-weight: 600; }
 .tabular label.inline, .tabular label.block { font-weight: normal; }
+a.assign-to-me-link { white-space: nowrap; }
 .check_box_group {
   background: var(--ig-field);
   border: 1px solid var(--ig-line-strong);
