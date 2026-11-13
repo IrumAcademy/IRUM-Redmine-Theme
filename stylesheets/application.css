@@ -295,7 +295,9 @@ svg.icon-svg { stroke: var(--ig-accent-text); }
 /* =========================================================================================
    4. Layout: content and sidebar as glass cards
    ========================================================================================= */
+/* Sidebar on the left (Redmine puts it on the right with row-reverse) */
 #main {
+  flex-direction: row;
   padding: 0 20px 20px 20px;
   gap: 16px;
   align-items: flex-start;
@@ -326,6 +328,8 @@ svg.icon-svg { stroke: var(--ig-accent-text); }
 #sidebar-switch-panel { margin: 0 0 6px 0; padding: 0; }
 #sidebar-switch-button { padding: 4px 6px; border-radius: var(--ig-radius-sm); width: auto; display: inline-block; }
 #sidebar-switch-button:hover { background: var(--ig-hover); }
+/* The collapse arrows point toward the right-hand sidebar; mirror them for the left one */
+#sidebar-switch-button svg { transform: scaleX(-1); }
 #sidebar h3 {
   color: var(--ig-text-2);
   font-size: 0.875rem;
@@ -377,6 +381,8 @@ svg.icon-svg { stroke: var(--ig-accent-text); }
 #admin-menu a:hover { background: var(--ig-hover); color: var(--ig-text); }
 #admin-menu a svg.icon-svg { stroke: currentColor; }
 #admin-menu a.selected { background: var(--ig-accent-soft) !important; color: var(--ig-accent-text) !important; margin-left: 0; }
+/* Plugin entries with a background-image icon instead of an SVG */
+#admin-menu a:not(:has(svg)) { padding-left: 32px !important; background-position: 10px 50%; }
 
 /* =========================================================================================
    5. Forms and buttons

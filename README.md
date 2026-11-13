@@ -27,7 +27,7 @@ The screenshots use a Korean interface. The projects, names and issues in them a
 
 ## Features
 
-- **Glass panels.** The content area, the sidebar and the top menu are translucent cards with a `backdrop-filter` blur.
+- **Glass panels.** The content area, the left-hand sidebar and the top menu are translucent cards with a `backdrop-filter` blur.
 - **One accent color.** The selected menu item, primary buttons, tabs, progress bars and links all use one blue (`#2563EB`).
 - **Light and dark.** The theme follows the operating system at first. The sun/moon button at the top right switches it, and the choice is saved in the browser.
 - **Phones.** The issue list turns into cards and form fields get bigger. Inputs use 16px text, so iPhones don't zoom in on them.
