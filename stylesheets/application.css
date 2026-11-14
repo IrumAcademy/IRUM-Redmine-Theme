@@ -1440,6 +1440,20 @@ div.avatar-with-child > .avatar:nth-child(2) { border-radius: 999px; border-colo
 .journals .journal-details a:hover { color: var(--ig-accent-hover); }
 #history div.journal.private-notes { border-left: 1px solid var(--ig-line); }
 
+/* Icons in links: Redmine 7 paints them dark blue with a more specific rule */
+a.icon .icon-svg, a.icon-only .icon-svg, span.icon-actions .icon-svg { stroke: var(--ig-accent-text); }
+a.icon .icon-svg-filled, a.icon-only .icon-svg-filled { fill: var(--ig-accent-text); }
+/* Gantt: header strips are painted #f1f3f5 inline */
+table.gantt-table [style*="#f1f3f5"] { background: var(--ig-surface-2) !important; }
+
+/* Phones: Redmine 7 gives #quick-search a height, so its inherited glass shows as a second layer */
+@media screen and (max-width: 899px) {
+  html #header #quick-search { background: transparent; }
+  /* Redmine 7 always draws an avatar here (initials when Gravatar is off) */
+  html .flyout-menu .flyout-menu__avatar:has(> a > .avatar) { align-items: center; gap: 8px; padding: 8px 8px 8px 12px; }
+  html .flyout-menu .flyout-menu__avatar > a:has(> .avatar) { line-height: 0; height: auto; }
+}
+
 /* =========================================================================================
    19. Print: plain white paper
    ========================================================================================= */
