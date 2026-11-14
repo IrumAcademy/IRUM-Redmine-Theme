@@ -44,7 +44,7 @@ cd /path/to/redmine
 git clone https://github.com/IrumAcademy/IRUM-Redmine-Theme.git themes/irum_redmine_theme
 ```
 
-1. Redmine을 재시작합니다. Redmine 6은 시작할 때 테마 파일을 다시 빌드합니다.
+1. Redmine을 재시작합니다. Redmine 6과 7은 시작할 때 테마 파일을 다시 빌드합니다.
 2. **관리 → 설정 → 표시방식 → 테마**에서 **Irum redmine theme**을 고르고 저장합니다.
    Redmine은 폴더 이름으로 테마 이름을 표시합니다.
 
@@ -79,7 +79,7 @@ services:
 
 ## 호환
 
-- Redmine 6.0.11에서 다음 화면을 확인했습니다: 일감 목록·보기·새로 만들기, 칸반, 달력, Gantt, 로드맵, 위키, 프로젝트, 내 페이지, 관리 설정, 로그인. 데스크톱과 휴대폰(390px), 라이트와 다크 모드에서 모두 봤습니다.
+- Redmine 6.0.11과 7.0.3에서 다음 화면을 확인했습니다: 일감 목록·보기·새로 만들기, 칸반, 달력, Gantt, 로드맵, 위키, 프로젝트, 내 페이지, 관리 설정, 로그인. 데스크톱과 휴대폰(390px), 라이트와 다크 모드에서 모두 봤습니다.
 - 최신 Chrome, Edge, Safari, Firefox. `backdrop-filter`가 없는 브라우저는 불투명 패널을 씁니다.
 - 휴대폰 일감 카드의 "담당", "변경" 머리말은 한국어 화면에서만 붙습니다.
 - 다른 플러그인 화면에서는 기본 색이 남는 곳이 있을 수 있습니다. 발견하면 이슈로 알려 주세요.
@@ -96,7 +96,7 @@ services:
 순서:
 1. Redmine 이 어떻게 설치돼 있는지 찾아. 직접 설치(Redmine 폴더 안에 themes/ 가 있음)인지,
    Docker(공식 redmine 이미지, docker-compose.yml)인지 확인하고, 모르겠으면 나에게 물어봐.
-   Redmine 버전이 6 인지도 확인해.
+   Redmine 버전이 6 또는 7 인지도 확인해.
 2. 저장소를 themes/irum_redmine_theme 라는 이름으로 clone 해. Docker 라면 compose 파일 옆에 clone 하고,
    redmine 서비스에 ./themes/irum_redmine_theme:/usr/src/redmine/themes/irum_redmine_theme:ro 마운트를 추가해.
    compose 파일을 고치기 전에 백업을 만들어.

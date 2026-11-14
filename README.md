@@ -44,7 +44,7 @@ cd /path/to/redmine
 git clone https://github.com/IrumAcademy/IRUM-Redmine-Theme.git themes/irum_redmine_theme
 ```
 
-1. Restart Redmine. Redmine 6 rebuilds theme assets at startup.
+1. Restart Redmine. Redmine 6 and 7 rebuild theme assets at startup.
 2. In **Administration → Settings → Display → Theme**, pick **Irum redmine theme** and save.
    Redmine names themes after their folder.
 
@@ -79,7 +79,7 @@ Edit the two token blocks at the top of `stylesheets/application.css`. `:root` i
 
 ## Compatibility
 
-- Checked on Redmine 6.0.11: issue list, issue view and new issue, kanban, calendar, Gantt, roadmap, wiki, projects, My page, admin settings and sign-in. Each was checked on desktop and phone (390px) in light and dark mode.
+- Checked on Redmine 6.0.11 and 7.0.3: issue list, issue view and new issue, kanban, calendar, Gantt, roadmap, wiki, projects, My page, admin settings and sign-in. Each was checked on desktop and phone (390px) in light and dark mode.
 - Current Chrome, Edge, Safari and Firefox. Browsers without `backdrop-filter` get opaque panels.
 - On phones, the "assignee" and "updated" labels on issue cards only appear in the Korean interface.
 - Pages from other plugins may still show some default colors. Please open an issue if you find one.
@@ -95,7 +95,7 @@ Repository: https://github.com/IrumAcademy/IRUM-Redmine-Theme
 
 Steps:
 1. Find out how Redmine is installed: directly (a Redmine folder with a themes/ directory) or with Docker
-   (the official redmine image and a docker-compose.yml). If unsure, ask me. Check that it is Redmine 6.
+   (the official redmine image and a docker-compose.yml). If unsure, ask me. Check that it is Redmine 6 or 7.
 2. Clone the repository as themes/irum_redmine_theme. For Docker, clone it next to the compose file and add the mount
    ./themes/irum_redmine_theme:/usr/src/redmine/themes/irum_redmine_theme:ro to the redmine service.
    Back up the compose file before you edit it.
