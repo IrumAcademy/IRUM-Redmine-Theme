@@ -65,6 +65,20 @@
 
   --fonts-main: var(--ig-font);
   color-scheme: light;
+
+  /* redmine_web_notifications panel colours (its stylesheet loads after the theme). They point at
+     the theme tokens, so the dark-mode values follow automatically. */
+  --web-notifications-bg: #fff;
+  --web-notifications-text: var(--ig-text);
+  --web-notifications-title: var(--ig-text);
+  --web-notifications-summary: var(--ig-text-2);
+  --web-notifications-muted: var(--ig-text-3);
+  --web-notifications-link: var(--ig-accent-text);
+  --web-notifications-border: var(--ig-line);
+  --web-notifications-divider: var(--ig-line);
+  --web-notifications-hover-bg: var(--ig-hover);
+  --web-notifications-unread-bg: var(--ig-accent-softer);
+  --web-notifications-unread-hover-bg: var(--ig-accent-soft);
 }
 
 html.irum-dark {
@@ -107,6 +121,7 @@ html.irum-dark {
   --ig-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 32px rgba(0, 0, 0, 0.35);
   --ig-shadow-pop: 0 12px 40px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.3);
   --ig-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a3aec2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  --web-notifications-bg: #141c2d;
   color-scheme: dark;
 }
 
@@ -1446,9 +1461,53 @@ a.icon .icon-svg-filled, a.icon-only .icon-svg-filled { fill: var(--ig-accent-te
 /* Gantt: header strips are painted #f1f3f5 inline */
 table.gantt-table [style*="#f1f3f5"] { background: var(--ig-surface-2) !important; }
 
+/* Issue page: Redmine 7 shows the issue number and subject in a bar at the top while scrolling.
+   It carries the `issue` class, so undo the issue card look and make it a glass bar like the top bar. */
+div#sticky-issue-header {
+  background: var(--ig-glass-strong);
+  -webkit-backdrop-filter: var(--ig-blur); backdrop-filter: var(--ig-blur);
+  border: 0;
+  border-bottom: 1px solid var(--ig-glass-border);
+  border-radius: 0;
+  box-shadow: 0 1px 0 var(--ig-line), 0 4px 20px rgba(15, 23, 42, 0.06);
+  color: var(--ig-text);
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 10px 24px;
+}
+/* A backdrop-filter makes #content the containing block of position: fixed children, which would
+   pin the bar to the top of #content instead of the window. The page background is a soft
+   gradient, so the blur is not missed here. */
+#content:has(> #sticky-issue-header), #content:has(#sticky-issue-header) { -webkit-backdrop-filter: none; backdrop-filter: none; }
+div#sticky-issue-header .issue-heading { color: var(--ig-text-2); font-weight: 600; }
+div#sticky-issue-header .subject { font-weight: 700; }
+
+/* Notification bell (redmine_web_notifications): on Redmine 7 it stands between the theme toggle
+   and the avatar, the same size as the toggle; on phones it sits next to the menu button */
+#top-menu .web-notifications-menu--header { margin: 0; }
+html .web-notifications-panel { background: var(--web-notifications-bg); border-radius: var(--ig-radius-md); box-shadow: var(--ig-shadow-pop); }
+#top-menu .web-notifications-menu--header a.web-notifications-bell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 28px;
+  padding: 0 !important;
+  margin: 0;
+  color: var(--ig-text-2);
+  background: transparent;
+}
+#top-menu .web-notifications-menu--header a.web-notifications-bell:hover { background: var(--ig-hover); color: var(--ig-text); }
+#top-menu .web-notifications-menu--header .web-notifications-badge { top: 0; right: 0; }
+html #header .web-notifications-menu--mobile a.web-notifications-bell { color: var(--ig-text); border-radius: var(--ig-radius-sm); }
+html #header .web-notifications-menu--mobile a.web-notifications-bell svg { stroke: none; }
+html #header .web-notifications-menu--mobile a.web-notifications-bell:hover { background: var(--ig-hover); }
+
 /* Phones: Redmine 7 gives #quick-search a height, so its inherited glass shows as a second layer */
 @media screen and (max-width: 899px) {
   html #header #quick-search { background: transparent; }
+  /* The author avatar next to the subject takes too much room on a phone (Redmine 6 has none) */
+  div.issue > .avatar-with-child { display: none; }
   /* Redmine 7 always draws an avatar here (initials when Gravatar is off) */
   html .flyout-menu .flyout-menu__avatar:has(> a > .avatar) { align-items: center; gap: 8px; padding: 8px 8px 8px 12px; }
   html .flyout-menu .flyout-menu__avatar > a:has(> .avatar) { line-height: 0; height: auto; }
