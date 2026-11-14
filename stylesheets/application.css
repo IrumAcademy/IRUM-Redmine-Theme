@@ -1398,6 +1398,48 @@ span[role="img"].avatar {
 }
 img.avatar, img.gravatar { border-radius: 999px; }
 
+/* Selected sidebar entry: no marker stripe on the left */
+#sidebar a.selected { box-shadow: none; }
+
+/* Issue form: Redmine 7 drops the side and bottom borders of its fieldsets */
+#issue-form fieldset:not(.collapsible), #bulk_edit_form fieldset:not(.collapsible) { border: 1px solid var(--ig-line); }
+
+/* Gantt: gantt.css loads after the theme and repaints the bars, hence `html` */
+html .task_todo { background: var(--ig-line-strong) none; border-color: transparent; border-radius: 3px; }
+html .task_done { background: var(--ig-accent) none; border-color: var(--ig-accent); border-radius: 3px 0 0 3px; }
+html .task_late { background: var(--ig-danger) none; border-color: var(--ig-danger); border-radius: 3px 0 0 3px; }
+html .task_todo.parent { background: var(--ig-text-3); border-color: var(--ig-text-3); }
+html .task { color: var(--ig-text-3); }
+
+/* Issue page: author avatar next to the subject */
+div.issue .avatar { margin-right: 14px; }
+div.avatar-with-child > .avatar:nth-child(2) { border-radius: 999px; border-color: var(--ig-glass-strong); }
+
+/* History: Redmine 7 journal markup (h4.journal-header, .journal-content, ul.journal-details) */
+#history div.journal h4.journal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: transparent;
+  border-bottom: 1px solid var(--ig-line);
+  color: var(--ig-text-2);
+  font-weight: 500;
+  padding: 8px 0 7px;
+  margin-bottom: 6px;
+}
+#history div.journal h4.journal-header .journal-info { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0 2px; }
+#history div.journal h4.journal-header .avatar { margin-right: 6px; }
+#history div.journal h4.journal-header .update-info { color: var(--ig-text-3); }
+.journals div:target h4.journal-header { background-color: var(--ig-accent-softer); }
+.journals .journal-content { padding-left: 0; margin-bottom: 0.6em; }
+.journals .journal .journal-content .wiki { margin-left: 0; }
+.journals .journal-meta .journal-link { color: var(--ig-text-3); }
+.journals .journal-details { color: var(--ig-text-3); margin-bottom: 0.6em; }
+.journals .journal-details a { color: var(--ig-accent-text); }
+.journals .journal-details a:hover { color: var(--ig-accent-hover); }
+#history div.journal.private-notes { border-left: 1px solid var(--ig-line); }
+
 /* =========================================================================================
    19. Print: plain white paper
    ========================================================================================= */
