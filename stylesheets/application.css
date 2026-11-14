@@ -1159,7 +1159,7 @@ table.list td.checkbox input, table.list th.checkbox input { margin: 0; vertical
    16. Light/dark toggle button (inserted by javascripts/theme.js)
    ========================================================================================= */
 #account li.irum-theme-toggle-item { vertical-align: middle; }
-#top-menu a#irum-theme-toggle {
+#top-menu a.irum-theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1171,11 +1171,11 @@ table.list td.checkbox input, table.list th.checkbox input { margin: 0; vertical
   border-radius: var(--ig-radius-sm);
   color: var(--ig-text-2);
 }
-#top-menu a#irum-theme-toggle:hover { background: var(--ig-hover); color: var(--ig-text); }
-#irum-theme-toggle:focus-visible { outline: 2px solid var(--ig-accent); outline-offset: 2px; }
-#irum-theme-toggle svg { display: block; flex: none; }
+#top-menu a.irum-theme-toggle:hover { background: var(--ig-hover); color: var(--ig-text); }
+.irum-theme-toggle:focus-visible { outline: 2px solid var(--ig-accent); outline-offset: 2px; }
+.irum-theme-toggle svg { display: block; flex: none; }
 .irum-theme-toggle-label { display: none; }
-.flyout-menu a#irum-theme-toggle { display: flex; align-items: center; gap: 10px; }
+.flyout-menu a.irum-theme-toggle { display: flex; align-items: center; gap: 10px; }
 .flyout-menu .irum-theme-toggle-label { display: inline; }
 
 /* =========================================================================================
@@ -1232,7 +1232,7 @@ table.list td.checkbox input, table.list th.checkbox input { margin: 0; vertical
   }
   html .flyout-menu__search input[type='text'] { background: var(--ig-field); color: var(--ig-text); border: 1px solid var(--ig-line-strong); border-radius: var(--ig-radius-sm); }
   html .flyout-menu svg.icon-svg, html .flyout-menu .icon svg { stroke: currentColor; }
-  html .flyout-menu a#irum-theme-toggle { padding-top: 12px; padding-bottom: 12px; }
+  html .flyout-menu a.irum-theme-toggle { padding-top: 12px; padding-bottom: 12px; }
 
   /* Action links above the content become buttons */
   html #content > .contextual > a, html #content > .contextual .drdn, html p.buttons a {
@@ -1312,7 +1312,94 @@ table.list td.checkbox input, table.list th.checkbox input { margin: 0; vertical
 }
 
 /* =========================================================================================
-   18. Print: plain white paper
+   18. Redmine 7 markup
+   Redmine 7 rebuilt the top bar (avatar drop-down instead of "Logged in as" + links), gave the
+   project menu a coloured band and draws initials avatars. These selectors only match the new
+   markup, so Redmine 6 is untouched.
+   ========================================================================================= */
+/* Top bar */
+nav.top-menu { justify-content: space-between; }
+#top-menu .top-menu__links ul { align-items: center; }
+#top-menu .profile-menu { gap: 2px; min-height: 28px; }
+#top-menu #account.dropdown .dropdown-trigger,
+#top-menu #account.dropdown .dropdown-trigger:link,
+#top-menu #account.dropdown .dropdown-trigger:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  margin: 0;
+  padding: 0 6px 0 2px;
+  border-radius: 999px;
+  color: var(--ig-text-2);
+  background: transparent;
+}
+#top-menu #account.dropdown .dropdown-trigger:hover,
+#top-menu #account.dropdown.expanded .dropdown-trigger { background: var(--ig-hover); color: var(--ig-text); }
+#top-menu #account.dropdown .dropdown-trigger .icon-svg { stroke: var(--ig-text-3); }
+#top-menu #account.dropdown .dropdown-trigger:hover .icon-svg { stroke: var(--ig-text); }
+#top-menu #account.dropdown .dropdown-trigger .avatar { width: 24px; height: 24px; font-size: 10px; }
+/* The drop-down panel */
+#top-menu #account .dropdown-content {
+  top: calc(100% + 6px);
+  margin-top: 0;
+  min-width: 200px;
+  padding: 4px;
+  background: var(--ig-glass-strong);
+  border: 1px solid var(--ig-line);
+  border-radius: var(--ig-radius-md);
+  box-shadow: var(--ig-shadow-pop);
+  color: var(--ig-text);
+  line-height: 1.45;
+  font-size: 0.875rem;
+}
+#top-menu #account .dropdown-content .user-info { display: flex; flex-direction: column; padding: 8px 10px 8px; color: var(--ig-text); }
+#top-menu #account .dropdown-content .user-info .user-name { font-weight: 700; }
+#top-menu #account .dropdown-content .user-info .user-login { color: var(--ig-text-3); font-size: 0.8rem; }
+#top-menu #account .dropdown-divider { border-top: 1px solid var(--ig-line); margin: 2px 4px 4px; }
+#top-menu #account .dropdown-content li { display: block; }
+#top-menu #account .dropdown-content li a {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: var(--ig-radius-sm);
+  color: var(--ig-text);
+  font-weight: 500;
+}
+#top-menu #account .dropdown-content li a:hover { background: var(--ig-accent-soft); color: var(--ig-accent-text); }
+#top-menu #account .dropdown-content .logout { border-top: 0; }
+#top-menu #account .dropdown-content li a.logout { border-top: 1px solid var(--ig-line); border-radius: 0 0 var(--ig-radius-sm) var(--ig-radius-sm); margin-top: 4px; }
+/* The toggle's copy in the drop-down is only for the phone slide-out menu */
+#top-menu #account .dropdown-content li.irum-theme-toggle-item { display: none; }
+
+/* Header: same height as on Redmine 6 */
+body.has-main-menu #header { padding-bottom: 64px; }
+@media screen and (min-width: 900px) {
+  #header h1 { display: block; min-height: 0; padding: 2px 10px 1px 0; margin: 0 0 10px 0; }
+}
+
+/* Project menu: no band, no marker line; the "+" button is a pill like the tabs */
+#header #main-menu { background: transparent; padding: 0; }
+#main-menu > ul { display: inline-flex; min-height: 0; }
+#main-menu > ul > li:has(a#new-object) { padding-right: 0; }
+#main-menu li a.selected, #main-menu li a.selected:hover { box-shadow: none; }
+#main-menu li a.new-object, #main-menu li a.new-object:hover { border: 0; margin: 0; border-radius: 10px; }
+#main-menu li a { line-height: inherit; }
+
+/* Initials avatars: one soft accent tint instead of eight colours */
+span[role="img"].avatar {
+  font-family: var(--ig-font);
+  background-color: var(--ig-accent-soft);
+  color: var(--ig-accent-text);
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+img.avatar, img.gravatar { border-radius: 999px; }
+
+/* =========================================================================================
+   19. Print: plain white paper
    ========================================================================================= */
 @media print {
   html, body { background: #fff !important; color: #000 !important; }
@@ -1322,5 +1409,5 @@ table.list td.checkbox input, table.list th.checkbox input { margin: 0; vertical
     box-shadow: none !important;
     border-color: #ccc !important;
   }
-  #irum-theme-toggle { display: none !important; }
+  .irum-theme-toggle { display: none !important; }
 }

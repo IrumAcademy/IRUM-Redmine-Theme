@@ -44,26 +44,20 @@
     var dark = isDark();
     root.classList.add('irum-theme');
     root.classList.toggle('irum-dark', dark);
-    var btn = document.getElementById(BTN_ID);
-    if (btn) {
-      var l = labels();
-      var title = dark ? l.toLight : l.toDark;
-      btn.innerHTML = (dark ? ICON_SUN : ICON_MOON) + '<span class="irum-theme-toggle-label">' + (dark ? l.light : l.dark) + '</span>';
-      btn.title = title;
-      btn.setAttribute('aria-label', title);
+    var l = labels();
+    var title = dark ? l.toLight : l.toDark;
+    var buttons = document.querySelectorAll('.' + BTN_ID);
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].innerHTML = (dark ? ICON_SUN : ICON_MOON) + '<span class="irum-theme-toggle-label">' + (dark ? l.light : l.dark) + '</span>';
+      buttons[i].title = title;
+      buttons[i].setAttribute('aria-label', title);
     }
   }
 
-  // The toggle is the first item of the account menu (top right). On phones Redmine moves
-  // that menu into the slide-out menu, so the toggle goes along with it.
-  function insertToggle() {
-    if (document.getElementById(BTN_ID)) return;
-    var list = document.querySelector('#account > ul') || document.querySelector('.js-profile-menu > ul');
-    if (!list) return;
-    var li = document.createElement('li');
-    li.className = 'irum-theme-toggle-item';
+  function makeButton(id) {
     var a = document.createElement('a');
-    a.id = BTN_ID;
+    if (id) a.id = id;
+    a.className = BTN_ID;
     a.href = '#';
     a.setAttribute('role', 'button');
     a.addEventListener('click', function (e) {
@@ -71,8 +65,34 @@
       try { localStorage.setItem(STORAGE_KEY, isDark() ? 'light' : 'dark'); } catch (err) {}
       apply();
     });
-    li.appendChild(a);
-    list.insertBefore(li, list.firstChild);
+    return a;
+  }
+
+  function makeItem(id) {
+    var li = document.createElement('li');
+    li.className = 'irum-theme-toggle-item';
+    li.appendChild(makeButton(id));
+    return li;
+  }
+
+  // Redmine 6: the toggle is the first item of the account menu (top right). On phones Redmine
+  // moves that menu into the slide-out menu, so the toggle goes along with it.
+  // Redmine 7: the account menu is a drop-down behind the avatar, so the toggle sits in front of
+  // it in the top bar (.profile-menu). A second copy goes into the drop-down's list, which Redmine
+  // moves into the slide-out menu on phones; on wide screens the stylesheet hides that copy.
+  function insertToggle() {
+    if (document.getElementById(BTN_ID)) return;
+    var profile = document.querySelector('#top-menu .profile-menu');
+    if (profile) {
+      profile.insertBefore(makeButton(BTN_ID), profile.firstChild);
+      var menu = document.querySelector('#account .dropdown-content > ul') || document.querySelector('.js-profile-menu > ul');
+      if (menu) menu.insertBefore(makeItem(null), menu.firstChild);
+      apply();
+      return;
+    }
+    var list = document.querySelector('#account > ul') || document.querySelector('.js-profile-menu > ul');
+    if (!list) return;
+    list.insertBefore(makeItem(BTN_ID), list.firstChild);
     apply();
   }
 
